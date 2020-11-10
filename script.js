@@ -1,7 +1,10 @@
 window.addEventListener("load", onLoad);
 
 function onLoad() {
-  //Primera parte
+  /*Primera lista*/
+
+  ///Añadir class:"element-n" en la lista 1:
+
   let elementInicial = document.getElementsByClassName('selected').item(0);
   
   elementInicial.classList.add("element-3");
@@ -10,36 +13,54 @@ function onLoad() {
   elementInicial.parentNode.nextElementSibling.firstChild.classList.add("element-4");
   elementInicial.parentNode.nextElementSibling.nextElementSibling.firstChild.classList.add("element-5");
 
-  let lista=document.querySelectorAll("li")
-  for(let i=0; i<lista.length ;i++){
+  ///Eliminar elementos pares:
+
+  //Se declara lista con los elementos
+  let lista = document.querySelectorAll("li")
+  //Se recorre la lista
+  for(let i = 0; i<lista.length ;i++){
+    //Si es un elemento par, se elimina
     if(i%2==1){
       lista[i].remove();
     }
   }
 
-let lista2 = document.getElementById("list1").children;  
-let lista2copiada = document.getElementById("list2");
-for(let i=0; i<lista2.length; i++){
-  let copia = lista2[i].cloneNode(true)
-  lista2copiada.append(copia);
-}
+  /*Segunda lista*/
+  //Se crean dos listas, una guarda los elementos de la lista 1 y la otra la lista 2
+  let lista2 = document.getElementById("list1").children;  
+  let lista2copiada = document.getElementById("list2");
 
-for(let i=0; i<lista2copiada.children.length; i++){
-  let clases =lista2copiada.children.item(i).firstChild.classList;
-  let texto =lista2copiada.children.item(i).firstChild.textContent;
- 
-  let eliminar = lista2copiada.children.item(i).firstChild;
-  eliminar.parentNode.removeChild(eliminar);
-
-  let boton = document.createElement("button");
-  boton.classList = clases;
-  boton.innerText=texto;
-  if(i==lista2copiada.children.length-1){
-    boton.setAttribute("disabled", true);
+  //Se recorre la primera lisa y se va copiando cada elemento en la segunda lista
+  for(let i = 0; i<lista2.length; i++){
+    let copia = lista2[i].cloneNode(true)
+    lista2copiada.append(copia);
   }
-  lista2copiada.children.item(i).appendChild(boton);
-}
-  console.log("hi");
+
+  //Se recorre la lista 2 para modificarla
+  for(let i = 0; i<lista2copiada.children.length; i++){
+    //Se guarda las clases y textos que contengan los span
+    let clases = lista2copiada.children.item(i).firstChild.classList;
+    let texto = lista2copiada.children.item(i).firstChild.textContent;
+  
+    //Se eliminan los span
+    let eliminar = lista2copiada.children.item(i).firstChild;
+    eliminar.parentNode.removeChild(eliminar);
+
+    //Se crea botón que sustituye a cada span
+    let boton = document.createElement("button");
+    //Se le atribuye las caracteristicas del span al botón
+    boton.classList = clases;
+    boton.innerText = texto;
+    //Si es el último botón, se le agrega atributo disabled
+    if(i==lista2copiada.children.length-1){
+      boton.setAttribute("disabled", true);
+    }
+
+    //Se agrega en la lista el botón creado
+    lista2copiada.children.item(i).appendChild(boton);
+  }
+
+  console.log("--FIN--");
 }
 
 
