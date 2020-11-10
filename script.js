@@ -1,3 +1,50 @@
+window.addEventListener("load", onLoad);
+
+function onLoad() {
+  //Primera parte
+  let elementInicial = document.getElementsByClassName('selected').item(0);
+  
+  elementInicial.classList.add("element-3");
+  elementInicial.parentNode.previousElementSibling.firstChild.classList.add("element-2");
+  elementInicial.parentNode.previousElementSibling.previousElementSibling.firstChild.classList.add("element-1");
+  elementInicial.parentNode.nextElementSibling.firstChild.classList.add("element-4");
+  elementInicial.parentNode.nextElementSibling.nextElementSibling.firstChild.classList.add("element-5");
+
+  let lista=document.querySelectorAll("li")
+  for(let i=0; i<lista.length ;i++){
+    if(i%2==1){
+      lista[i].remove();
+    }
+  }
+
+let lista2 = document.getElementById("list1").children;  
+let lista2copiada = document.getElementById("list2");
+for(let i=0; i<lista2.length; i++){
+  let copia = lista2[i].cloneNode(true)
+  lista2copiada.append(copia);
+}
+
+for(let i=0; i<lista2copiada.children.length; i++){
+  let clases =lista2copiada.children.item(i).firstChild.classList;
+  let texto =lista2copiada.children.item(i).firstChild.textContent;
+ 
+  let eliminar = lista2copiada.children.item(i).firstChild;
+  eliminar.parentNode.removeChild(eliminar);
+
+  let boton = document.createElement("button");
+  boton.classList = clases;
+  boton.innerText=texto;
+  if(i==lista2copiada.children.length-1){
+    boton.setAttribute("disabled", true);
+  }
+  lista2copiada.children.item(i).appendChild(boton);
+}
+  console.log("hi");
+}
+
+
+
+
 // En este ejercicio deberéis realizar algunos cambios sobre las dos listas incluidas en "index.html".
 // En la primera lista tendréis que hacer lo siguiente:
 //    * Añadid la clase "element-n" a cada "span" de la lista, siendo "n" el número del lugar que ocupa en la lista (por ejemplo el segundo "span" de la lista tendría la clase "element-2"). Para ello, haced uso de los selectores de nodo (parentNode, nextSibling, firstChild...) partiendo del "span" con la clase "selected" siempre.
@@ -8,8 +55,4 @@
 //    * Después de generar esta segunda lista, añadid el atributo disabled al último botón.
 // Suerte!
 
-window.addEventListener("load", onLoad);
 
-function onLoad() {
-  console.log("hi");
-}
